@@ -204,6 +204,7 @@ impl PalF {
     }
 
     pub(crate) fn with_fixed_colors(self, max_colors: PalLen, fixed_colors: &FixedColorsSet) -> PalF {
+        println!("Fixed {}", max_colors);
         if fixed_colors.is_empty() {
             return self;
         }

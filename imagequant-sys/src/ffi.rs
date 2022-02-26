@@ -523,16 +523,20 @@ pub fn liq_image_quantize(img: &mut liq_image, attr: &mut liq_attr, write_only_o
 #[no_mangle]
 #[inline(never)]
 pub fn liq_histogram_quantize(hist: &mut liq_histogram, attr: &liq_attr, write_only_output: &mut MaybeUninit<Option<Box<liq_result>>>) -> liq_error {
+    println!("Part1");
     if bad_object!(attr, LIQ_ATTR_MAGIC) ||
        bad_object!(hist, LIQ_HISTOGRAM_MAGIC) { return Error::InvalidPointer; }
     let attr = &attr.inner;
     let hist = &mut hist.inner;
 
+    println!("Part2");
     let res = hist.quantize(attr)
         .map(|inner| liq_result {
             magic_header: LIQ_RESULT_MAGIC,
             inner,
         });
+
+    println!("Part3");
     store_boxed_result(res, write_only_output)
 }
 
